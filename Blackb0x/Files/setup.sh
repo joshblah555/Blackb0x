@@ -80,9 +80,10 @@ apt-get install -y mobilesubstrate
 
 echo "Adding replacement default repository" >> /var/mobile/Media/blackb0x.log
 
-if [ -f /etc/apt/sources.list.d/awkward.list ]; then
+if [ -f /etc/apt/sources.list.d/awkward.list ] && [ -f /etc/apt/sources.list.d/awkwardtv.list ]; then
 echo "AwkwardTV detected. Replacing..." >> /var/mobile/Media/blackb0x.log
 /bin/rm -rf /etc/apt/sources.list.d/awkward.list
+/bin/rm -rf /etc/apt/sources.list.d/awkwardtv.list
 mv /joshtv.list /etc/apt/sources.list.d/
 /usr/bin/apt-key add /pubkey.key
 else
