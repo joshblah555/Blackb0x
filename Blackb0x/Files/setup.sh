@@ -80,14 +80,24 @@ apt-get install -y mobilesubstrate
 
 echo "Adding replacement default repository" >> /var/mobile/Media/blackb0x.log
 
-if [ -f /etc/apt/sources.list.d/awkward.list ] && [ -f /etc/apt/sources.list.d/awkwardtv.list ]; then
-echo "AwkwardTV detected. Replacing..." >> /var/mobile/Media/blackb0x.log
+if [ -f /etc/apt/sources.list.d/awkward.list ]; then
+echo "Apple TV 2 awkwardTV detected. Replacing..." >> /var/mobile/Media/blackb0x.log
 /bin/rm -rf /etc/apt/sources.list.d/awkward.list
+mv /joshtv.list /etc/apt/sources.list.d/
+/usr/bin/apt-key add /pubkey.key
+else
+echo "Apple TV 2 AwkwardTV doesn't exist. Adding replacement..." >> /var/mobile/Media/blackb0x.log
+mv /joshtv.list /etc/apt/sources.list.d/
+/usr/bin/apt-key add /pubkey.key
+fi
+
+if [ -f /etc/apt/sources.list.d/awkwardtv.list ]; then
+echo "Apple TV 3 awkwardTV detected. Replacing..." >> /var/mobile/Media/blackb0x.log
 /bin/rm -rf /etc/apt/sources.list.d/awkwardtv.list
 mv /joshtv.list /etc/apt/sources.list.d/
 /usr/bin/apt-key add /pubkey.key
 else
-echo "AwkwardTV doesn't exist. Adding replacement..." >> /var/mobile/Media/blackb0x.log
+echo "Apple TV 3 AwkwardTV doesn't exist. Adding replacement..." >> /var/mobile/Media/blackb0x.log
 mv /joshtv.list /etc/apt/sources.list.d/
 /usr/bin/apt-key add /pubkey.key
 fi
